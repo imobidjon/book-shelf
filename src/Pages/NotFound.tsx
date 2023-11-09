@@ -1,8 +1,31 @@
 import { Box } from "@mui/material";
 import styled from "styled-components";
 import { CustomButton } from "../Components/Button";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function NotFound() {
+  const navigate = useNavigate()
+
+  const StyledButton = styled(Button)`
+    && {
+      background: ${(props) =>
+        props.variant === "outlined" ? `none` : `#6200ee`};
+      color: ${(props) =>
+        props.variant === "outlined" ? `#6200ee` : `#fefefe`};
+      border-radius: 4px;
+      border: none;
+      padding: 10px 24px;
+      width: 100%;
+      border: ${(props) =>
+        props.variant === "outlined" ? `1px solid #6200EE` : `none`};
+    }
+    &&:hover {
+      background: #8236ee;
+      color: #fefefe;
+    }
+  `;
+
   const StyledBox = styled(Box)`
     && {
       display: flex;
@@ -14,13 +37,22 @@ export default function NotFound() {
 
   const ButtonBox = styled(Box)`
     && {
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        margin: 50px 500px 0px 500px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 50px 500px 0px 500px;
     }
   `;
+
+  function refreshPage() {
+    window.location.reload();
+  }
+
+  function chagePage() {
+    navigate('/')
+  }
+
   return (
     <>
       <StyledBox>
@@ -180,8 +212,10 @@ export default function NotFound() {
         </svg>
       </StyledBox>
       <ButtonBox>
-        <CustomButton btnText="Go Home Page" />
-        <CustomButton btnText="Reload Page" btnVariant="outlined" />
+        <StyledButton variant="contained" onClick={chagePage} >Go Home Page</StyledButton>
+        <StyledButton onClick={refreshPage} variant="outlined">
+          Reload Page
+        </StyledButton>
       </ButtonBox>
     </>
   );

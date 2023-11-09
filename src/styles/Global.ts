@@ -10,7 +10,6 @@ export const GlobalStyles = createGlobalStyle`
 
     body {
         background: #F8F8F8;
-        overflow-y: hidden;
     }
 
     .bgCube {
@@ -19,7 +18,7 @@ export const GlobalStyles = createGlobalStyle`
         border-radius: 50px;
         background-color: #333333;
         transform: rotate(140deg);
-        position: absolute;
+        position: fixed;
         top: -300px;
         left: -500px;
         z-index: -1;

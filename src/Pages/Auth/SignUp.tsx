@@ -81,12 +81,16 @@ const StyledLabel = styled.label`
 
 const SignUp = (): JSX.Element => {
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const createUser = useCreateUser({
     onSuccess: () => {
       toast.success("User created!");
-      navigate("/login");
+      navigate("/");
     },
     onError: (err: any) => {
       console.log(err);
@@ -127,6 +131,7 @@ const SignUp = (): JSX.Element => {
             <StyledLabel htmlFor="name">Your Name</StyledLabel>
             <StyledInput
               id="name"
+              error={errors?.name ? true : false}
               required
               fullWidth
               {...register("name", { required: true })}
@@ -139,9 +144,10 @@ const SignUp = (): JSX.Element => {
               <StyledLabel htmlFor="email">Your email</StyledLabel>
               <StyledInput
                 id="email"
+                error={errors?.email ? true : false}
                 required
                 fullWidth
-                {...register("email", { required: true })}
+                {...register("email", { required: true, pattern: /\S+@\S+\.\S+/, })}
                 type="text"
                 placeholder="Enter your email"
               />
@@ -151,6 +157,8 @@ const SignUp = (): JSX.Element => {
             <StyledInput
               fullWidth
               id="username"
+              error={errors?.key ? true : false}
+
               required
               {...register("key", { required: true })}
               type="text"
@@ -163,7 +171,9 @@ const SignUp = (): JSX.Element => {
                 fullWidth
                 id="Password"
                 type="password"
-                {...register("secret", { required: true })}
+                error={errors?.secret ? true : false}
+
+                {...register("secret", { required: true, })}
                 required
                 placeholder="Enter your password"
               />
@@ -173,7 +183,7 @@ const SignUp = (): JSX.Element => {
           </Box>
 
           <Typography textAlign={"center"} fontSize={"14px"} fontWeight={300}>
-            Already signed up? {" "}
+            Already signed up?{" "}
             <NavLink to={"/sign-in"} style={{ textDecoration: "none" }}>
               Go to sign in.
             </NavLink>

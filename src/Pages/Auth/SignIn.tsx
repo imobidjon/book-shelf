@@ -76,7 +76,7 @@ const StyledLabel = styled.label`
 const SignIn = (): JSX.Element => {
   const navigate = useNavigate();
   const cookies = new Cookies();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit,  formState: { errors }, } = useForm();
   const { setUser } = useContext(MainContext);
 
   const getMyself = useLoginMyself({
@@ -126,6 +126,7 @@ const SignIn = (): JSX.Element => {
             <TextField
               fullWidth
               id="username"
+              error={errors?.key ? true : false}
               required
               {...register("key", { required: true })}
               type="text"
@@ -137,6 +138,7 @@ const SignIn = (): JSX.Element => {
               <TextField
               fullWidth
                 id="Password"
+                error={errors?.secret ? true : false}
                 type="password"
                 {...register("secret", { required: true })}
                 required

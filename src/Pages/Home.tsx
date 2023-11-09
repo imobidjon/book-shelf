@@ -28,19 +28,17 @@ export default function Home() {
       <Box component="main">
         <Toolbar />
         <TopBar handleClickOpen={() => handleClickOpen()} />
-        <Box sx={{ overflowY: "scroll", height:'100vh', pr:10 }}>
-          {!isSearch ? (
-            <Book />
-          ) : (
-            <>
-              <Grid container columnSpacing={6} rowSpacing={1}>
-                {data?.map((bookObj) => (
-                  <SearchCard SearchedBooks={bookObj} key={bookObj?.isbn} />
-                ))}
-              </Grid>
-            </>
-          )}
-        </Box>
+        {!isSearch ? (
+          <Book />
+        ) : (
+          <>
+            <Grid container columnSpacing={6} rowSpacing={1}>
+              {data?.map((bookObj) => (
+                <SearchCard SearchedBooks={bookObj} key={bookObj?.isbn} />
+              ))}
+            </Grid>
+          </>
+        )}
       </Box>
     </Box>
   );
